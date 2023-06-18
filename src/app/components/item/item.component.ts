@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
 import { faPen, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { Item } from 'src/app/interfaces/iItem';
 
@@ -10,6 +10,7 @@ import { Item } from 'src/app/interfaces/iItem';
 export class ItemComponent implements OnInit, OnChanges {
 
   @Input() item! : Item;
+  @Output() emitindoItemParaEditar = new EventEmitter();
 
   faPen = faPen;
   faTrash = faTrash
@@ -17,10 +18,16 @@ export class ItemComponent implements OnInit, OnChanges {
   constructor() { }
 
   ngOnInit(): void {
-    console.log('On Inite')
   }
 
   ngOnChanges(){
-    console.log('On change')
+  }
+
+  editarItem(){
+    this.emitindoItemParaEditar.emit(this.item);
   }
 }
+function OutPut(): (target: ItemComponent, propertyKey: "faPen") => void {
+  throw new Error('Function not implemented.');
+}
+
